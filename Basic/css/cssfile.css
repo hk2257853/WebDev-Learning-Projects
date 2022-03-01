@@ -1,0 +1,21 @@
+h1 {
+  color: blue;
+}
+
+.prestuff {
+  color: blueviolet;
+}
+
+body {
+  color: red;
+}
+
+.Box {
+  height: 100px;
+  width: 100px;
+  padding: 20px;
+  margin: 50px;
+  border: 10px solid black;
+  background-color: blue;
+}
+/* watch from 10:50 to 14:10 to understand about priority stuff */

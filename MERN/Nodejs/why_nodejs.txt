@@ -1,0 +1,2 @@
+Run js outside broswer (like in server)
+can be used in making of apis, webserver etc.

@@ -1,0 +1,15 @@
+body::before {
+  /*The navbar is hiding the image when scroll bar is at 0*/
+  display: block;
+  content: "";
+  height: 60px;
+}
+
+@media (min-width: 768px) {
+  .news-input {
+    width: 50%;
+  }
+}
+
+/* I want the input bar for newsletter to be of 50% width on large screen.
+No such option in that bootstrap... So made a custom one */
