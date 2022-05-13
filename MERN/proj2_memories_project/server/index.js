@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import postRoutes from "./routes/posts.js";
+import userRoutes from "./routes/user.js";
 
 const app = express();
 dotenv.config();
@@ -15,9 +16,10 @@ app.use(cors());
 
 const PORT = process.env.PORT || 1300;
 
-// will work for all localhost:.../posts   I have learnt this (user as eg)
+// will work for all localhost:.../posts   I have learnt this (user as eg). when called with/without info, will do something...
 app.use("/posts", postRoutes); //NOTE: routes need to be spefied after cors to avoid cors error
 // ALSO: put "proxy": "http://localhost:1300", in package.json. I needed to connect to net too
+app.use("/user", userRoutes);
 
 // Connect to DB
 //const CONNECTION_URL = "mongodb://localhost:27017/first-app";

@@ -1,3 +1,5 @@
+// Part of redux
+
 import {
   FETCH_ALL,
   CREATE,
@@ -8,6 +10,9 @@ import {
 
 import * as api from "../api";
 
+// here we needed it to be async...
+// async(disptach) that returns another function. QUESTION: Why can't we do directly??
+// redux thunk syntax
 export const getPosts = () => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();
@@ -17,8 +22,6 @@ export const getPosts = () => async (dispatch) => {
     console.log(error.message);
   }
 };
-// here we needed it to be async...
-// async(disptach) that returns another function. QUESTION: Why can't we do directly??
 
 export const createPost = (post) => async (dispatch) => {
   try {

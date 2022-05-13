@@ -1,0 +1,5 @@
+Fix 2 bugs:
+1) google auth -> need to migrate to the new library
+2) Likes part causes issue when I update/edit post.
+
+Also update the pics later.

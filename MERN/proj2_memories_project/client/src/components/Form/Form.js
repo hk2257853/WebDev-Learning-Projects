@@ -10,13 +10,12 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch(); // to dispatch the actions
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
     selectedFile: "",
   });
-
+  const user = JSON.parse(localStorage.getItem("profile"));
   // find the post with that id. if not found return null
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
@@ -32,19 +31,33 @@ const Form = ({ currentId, setCurrentId }) => {
 
     if (!currentId) {
       // if no id, create the post
-      dispatch(createPost(postData)); // dispatch by calling createPost from posts.js (actions) with all the data from form
+      // dispatch(createPost(postData)); // dispatch by calling createPost from posts.js (actions) with all the data from form
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
       clear();
     } else {
       // else update the post
-      dispatch(updatePost(currentId, postData));
+      // dispatch(updatePost(currentId, postData));
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      ); // had written createPost in place of updatePost. Created issue!!
       clear();
     }
   };
 
+  if (!user?.result?.name) {
+    // Question: how this running autometically?
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Pleae login to create or like a post
+        </Typography>
+      </Paper>
+    );
+  }
+
   const clear = () => {
     setCurrentId(0);
     setPostData({
-      creator: "",
       title: "",
       message: "",
       tags: "",
@@ -64,19 +77,6 @@ const Form = ({ currentId, setCurrentId }) => {
           <Typography variant="h6">
             {currentId ? `Editing "${post.title}"` : "Creating a Memory"}
           </Typography>
-          <TextField
-            name="creator"
-            variant="outlined"
-            label="Creator"
-            fullWidth
-            value={postData.creator /* This will have all the input data */}
-            onChange={(e) =>
-              setPostData({
-                ...postData /* see 1:02:50 */,
-                creator: e.target.value,
-              })
-            }
-          />
           <TextField
             name="title"
             variant="outlined"
